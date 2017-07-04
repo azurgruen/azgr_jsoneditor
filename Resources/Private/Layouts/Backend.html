@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!-- when using the mode "code", it's important to specify charset utf-8 -->
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+	<link href="/typo3conf/ext/azgr_jsoneditor/Resources/Public/Css/normalize.min.css" rel="stylesheet" type="text/css">
+	<link href="/typo3/sysext/backend/Resources/Public/Css/backend.css" rel="stylesheet" type="text/css">
+    <link href="/typo3conf/ext/azgr_jsoneditor/Resources/Public/Css/jsoneditor.css" rel="stylesheet" type="text/css">
+    <link href="/typo3conf/ext/azgr_jsoneditor/Resources/Public/Css/styles.css" rel="stylesheet" type="text/css">
+    <script src="/typo3conf/ext/azgr_jsoneditor/Resources/Public/JavaScript/jquery.js"></script>
+    <script src="/typo3conf/ext/azgr_jsoneditor/Resources/Public/JavaScript/jsoneditor.js"></script>
+</head>
+<body>
+	<div class="module" data-module-id="" data-module-name="">
+		<div class="module-loading-indicator"></div>
+		<div class="module-docheader t3js-module-docheader">
+			<div class="module-docheader-bar module-docheader-bar-buttons t3js-module-docheader-bar t3js-module-docheader-bar-buttons">
+				<div class="module-docheader-bar-column-left">
+					<div class="btn-toolbar" role="toolbar" aria-label="">
+						<f:for each="{files}" as="file">
+							<f:link.action class="btn btn-default btn-sm" controller="Backend" action="show" arguments="{file:file.name}">
+								<span class="t3js-icon icon icon-size-small icon-state-default">
+									<span class="icon-markup">
+										<img src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-page-open.svg" width="16" height="16">
+									</span>
+								</span>
+								{file.name}
+							</f:link.action>
+						</f:for>
+					</div>
+				</div>
+			</div>
+			<div class="module-docheader-bar module-docheader-bar-buttons t3js-module-docheader-bar t3js-module-docheader-bar-buttons">
+				<div class="module-docheader-bar-column-left">
+					<f:render section="header" />
+				</div>
+			</div>
+		</div>
+		<div class="module-body t3js-module-body">
+			<f:flashMessages />
+			<f:render section="content" />
+		</div>
+	</div>
+</body>
+</html>

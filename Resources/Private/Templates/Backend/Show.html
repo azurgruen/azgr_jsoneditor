@@ -1,0 +1,51 @@
+<f:layout name="Backend"/>
+
+<f:section name="header">
+	<div class="btn-toolbar" role="toolbar" aria-label="">
+		<a id="savebutton" class="btn btn-default btn-sm" href="#">
+			<span class="t3js-icon icon icon-size-small icon-state-default">
+				<span class="icon-markup">
+					<img src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-save.svg" width="16" height="16">
+				</span>
+			</span>
+		</a>
+		<f:link.action class="btn btn-default btn-sm" controller="Backend" action="index">
+			<span class="t3js-icon icon icon-size-small icon-state-default">
+				<span class="icon-markup">
+					<img src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-close.svg" width="16" height="16">
+				</span>
+			</span>
+		</f:link.action>
+	</div>
+</f:section>
+ 
+<f:section name="content">
+    <h1>{filename}</h1>
+    
+    <div id="jsoneditor"></div>
+    
+	<f:form class="form" action="update" controller="Backend" enctype="multipart/form-data">
+		<f:form.hidden name="file" value="{filename}" />
+		<f:form.hidden name="jsondata" value="" />
+	</f:form>
+    
+    <script>
+        
+	    var azgr_jsoneditor = {};
+	    azgr_jsoneditor.url = '<f:format.raw>{f:uri.action(controller:"Backend", action:"update", arguments:"{file:filename}")}</f:format.raw>';
+	    azgr_jsoneditor.language = '{language}';
+	    azgr_jsoneditor.container = document.getElementById('jsoneditor');
+		azgr_jsoneditor.options = { mode: 'form' };
+		azgr_jsoneditor.editor = new JSONEditor(azgr_jsoneditor.container, azgr_jsoneditor.options);
+		azgr_jsoneditor.jsondata = <f:format.raw>{json}</f:format.raw>;
+        azgr_jsoneditor.editor.set(azgr_jsoneditor.jsondata);
+        
+        document.getElementById('savebutton').addEventListener('click', function(e) {
+	        e.preventDefault();
+	        var jsondata = azgr_jsoneditor.editor.get();
+	        $('form [name*="[jsondata]"]').val(JSON.stringify(jsondata));
+	        $('form').submit();
+        });
+    </script>
+    
+</f:section>

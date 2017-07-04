@@ -1,0 +1,5 @@
+# cat=basic/enable; type=string; label=Path to language file. Specify a file name related to web site root directory.
+filePath = assets/js/localize/
+
+# cat=basic/enable; type=string; label=Allowed file extensions (comma separated)
+fileExt = json
